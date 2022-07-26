@@ -2,10 +2,16 @@ import styles from "./Avatar.module.css";
 
 interface AvatarProps {
   src: string;
+  hasBorder?: boolean;
 }
 
-const Avatar = ({ src }: AvatarProps) => {
-  return <img className={styles.avatar} src={src} />;
+const Avatar = ({ src, hasBorder = true }: AvatarProps) => {
+  return (
+    <img
+      className={hasBorder ? styles.avatarWithBorder : styles.avatar}
+      src={src}
+    />
+  );
 };
 
 export default Avatar;
