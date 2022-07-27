@@ -76,6 +76,10 @@
   margin-right: 0.5rem;
 }
 
+.filled svg path {
+  fill: var(--gray-100);
+}
+
 .commentBox footer button span::before {
   padding: 0 0.25rem;
   content: "\2022";
