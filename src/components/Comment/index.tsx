@@ -1,8 +1,28 @@
 import { ThumbsUp, Trash } from "phosphor-react";
+import { useState } from "react";
 import Avatar from "../Avatar";
 import styles from "./Comment.module.css";
 
-const Comment = () => {
+interface CommentProps {
+  comment: string;
+  id: number;
+  deleteComment: (id: number) => void;
+}
+
+const Comment = ({ comment, deleteComment, id }: CommentProps) => {
+  const [likeCounts, setLikeCounts] = useState(0);
+  const [isLiked, setIsLiked] = useState(false);
+
+  const addOrRemoveLike = () => {
+    if (!isLiked) {
+      setLikeCounts((currentCount) => currentCount + 1);
+      setIsLiked(true);
+    } else {
+      setLikeCounts((currentCount) => currentCount - 1);
+      setIsLiked(false);
+    }
+  };
+
   return (
     <div className={styles.comment}>
       <Avatar src="https://github.com/carlos-hr.png" hasBorder={false} />
@@ -19,16 +39,22 @@ const Comment = () => {
               </time>
             </div>
 
-            <button title="Deletar comentário">
+            <button
+              title="Deletar comentário"
+              onClick={() => deleteComment(id)}
+            >
               <Trash size={24} />
             </button>
           </header>
-          <p>Muito bom Devon, parabéns!! 👏👏</p>
+          <p>{comment}</p>
         </div>
         <footer>
-          <button>
+          <button
+            className={isLiked ? styles.filled : ""}
+            onClick={addOrRemoveLike}
+          >
             <ThumbsUp size={16} />
-            Aplaudir <span>100</span>
+            Aplaudir <span>{likeCounts}</span>
           </button>
         </footer>
       </div>
