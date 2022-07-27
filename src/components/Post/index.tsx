@@ -70,7 +70,7 @@ const Post = ({ post }: PostProps) => {
       </header>
 
       <div className={styles.content}>
-        {content.map((line, i, x) => {
+        {content.map((line) => {
           if (line.type === "paragraph") {
             return <p key={line.content}>{line.content}</p>;
           } else if (line.type === "link") {
